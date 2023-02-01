@@ -11,6 +11,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import javax.imageio.ImageIO;
+
+import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import lain.mods.skins.api.interfaces.ISkin;
 
 public class SkinData implements ISkin
@@ -38,6 +40,14 @@ public class SkinData implements ISkin
         {
             return "unknown";
         }
+    }
+
+    public static String getSkinType(MinecraftProfileTexture tex) {
+        String model = tex.getMetadata("model");
+        if(model == null) {
+            return "default";
+        }
+        return model;
     }
 
     public static String judgeSkinType(ByteBuffer data)

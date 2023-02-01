@@ -34,7 +34,7 @@ public class MojangSkinProvider implements ISkinProvider
                     MinecraftProfileTexture tex = textures.get(MinecraftProfileTexture.Type.SKIN);
                     Shared.downloadSkin(tex.getUrl(), Runnable::run).thenApply(Optional::get).thenAccept(data -> {
                         if (SkinData.validateData(data))
-                            skin.put(data, SkinData.judgeSkinType(data));
+                            skin.put(data, SkinData.getSkinType(tex));
                     });
                 }
             }
