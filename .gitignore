@@ -5,3 +5,5 @@
 /.gradle/
 /gradle.properties
 /libs/
+
+.idea/

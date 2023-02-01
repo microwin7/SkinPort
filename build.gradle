@@ -2,37 +2,43 @@ buildscript {
     repositories {
         mavenCentral()
         maven {
+            name = "juanmuscaria"
+            url = "https://github.com/juanmuscaria/maven/raw/master"
+        }
+        maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-1.5.6-SNAPSHOT'
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'lib'
     }
 }
 
 apply plugin: 'forge'
 
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
 version = "1.7.10-v10d"
 group= "lain.mods.skinport"
 archivesBaseName = "SkinPort"
 
+sourceCompatibility = targetCompatibility = '1.8'
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
 minecraft {
-    version = "1.7.10-10.13.4.1448-1.7.10"
+    version = "1.7.10-10.13.4.1614-1.7.10"
     runDir = "eclipse"
 }
 
-jar
-{
-    manifest {
-        attributes 'FMLCorePlugin': 'lain.mods.skinport.init.forge.asm.Plugin',
-		           'FMLCorePluginContainsFMLMod': 'true'
-    }
-}
 
 processResources
 {
@@ -53,6 +59,14 @@ processResources
         exclude 'mcmod.info'
     }
 }
-
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+dependencies {
+    compile name: 'MorePlayerModels_1.7.10b-dev'
+    compile name: 'RenderPlayerAPI-1.7.10-1.4-dev'
+//    compile name: archivesBaseName + '-' + version + '-dev'
+}
+jar {
+    manifest {
+        attributes 'FMLCorePlugin': 'lain.mods.skinport.init.forge.asm.Plugin',
+            'FMLCorePluginContainsFMLMod': 'true'
+    }
+}
