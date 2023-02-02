@@ -25,7 +25,7 @@ apply plugin: 'forge'
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
-version = "1.7.10-v10d"
+version = "1.7.10-v11"
 group= "lain.mods.skinport"
 archivesBaseName = "SkinPort"
 
