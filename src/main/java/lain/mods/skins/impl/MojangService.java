@@ -91,8 +91,8 @@ public class MojangService
                     GameProfile constructed = gson.fromJson(buf.toString(), GameProfile.class);
                     if (!constructed.isComplete()) // why does the server return an incomplete profile? treat it as not found.
                         return Shared.DUMMY;
-                    if (Shared.isOfflinePlayer(constructed.getId(), constructed.getName())) // why does the server return an offline profile? treat it as not found.
-                        return Shared.DUMMY;
+//                    if (Shared.isOfflinePlayer(constructed.getId(), constructed.getName())) // why does the server return an offline profile? treat it as not found.
+//                        return Shared.DUMMY;
                     return new GameProfile(constructed.getId(), constructed.getName()); // reconstruct it because default JsonDeserializer doesn't construct a GameProfile properly, can't use GameProfileSerializer because it's a private class.
                 }
             }
