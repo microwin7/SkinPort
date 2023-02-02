@@ -26,6 +26,7 @@ public class MojangSkinProvider implements ISkinProvider
         if (_filter != null)
             skin.setSkinFilter(_filter);
         SharedPool.execute(() -> {
+            //if (!Shared.isOfflinePlayer(profile.getPlayerID(), profile.getPlayerName())) {
                 Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> textures = MinecraftUtils.getSessionService().getTextures((GameProfile) profile.getOriginal(), false);
                 if (textures != null && textures.containsKey(MinecraftProfileTexture.Type.SKIN))
                 {
@@ -35,6 +36,7 @@ public class MojangSkinProvider implements ISkinProvider
                             skin.put(data, SkinData.getSkinType(tex));
                     });
                 }
+            //}
         });
         return skin;
     }
