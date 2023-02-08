@@ -26,8 +26,7 @@ public class MojangCapeProvider implements ISkinProvider
         if (_filter != null)
             skin.setSkinFilter(_filter);
         SharedPool.execute(() -> {
-            if (!Shared.isOfflinePlayer(profile.getPlayerID(), profile.getPlayerName()))
-            {
+            //if (!Shared.isOfflinePlayer(profile.getPlayerID(), profile.getPlayerName())) {
                 Map<MinecraftProfileTexture.Type, MinecraftProfileTexture> textures = MinecraftUtils.getSessionService().getTextures((GameProfile) profile.getOriginal(), false);
                 if (textures != null && textures.containsKey(MinecraftProfileTexture.Type.CAPE))
                 {
@@ -37,7 +36,7 @@ public class MojangCapeProvider implements ISkinProvider
                             skin.put(data, "cape");
                     });
                 }
-            }
+            //}
         });
         return skin;
     }
