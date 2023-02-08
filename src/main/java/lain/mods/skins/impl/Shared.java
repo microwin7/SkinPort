@@ -40,8 +40,6 @@ public class Shared
 
     public static final GameProfile DUMMY = new GameProfile(UUID.fromString("ae9460f5-bf72-468e-89b6-4eead59001ad"), "");
 
-    private static final Cache<UUID, Boolean> offlines = CacheBuilder.newBuilder().weakKeys().build();
-
     /**
      * Call a possibly blocking task in a ManagedBlocker to allow current Thread adjust if it is a ForkJoinWorkerThread.
      *
@@ -152,18 +150,8 @@ public class Shared
 
     public static boolean isOfflinePlayer(UUID id, String name)
     {
-        if (id == null || isBlank(name)) // treat incomplete profiles as offline profiles, but don't cache results for them as they can be updated later and possibly become online profiles.
-            return true;
-        try
-        {
-            return offlines.get(id, () -> {
-                return UUID.nameUUIDFromBytes(("OfflinePlayer:" + name).getBytes(StandardCharsets.UTF_8)).equals(id);
-            });
-        }
-        catch (Throwable t)
-        {
-            return true;
-        }
+        // treat incomplete profiles as offline profiles, but don't cache results for them as they can be updated later and possibly become online profiles.
+        return id == null || isBlank(name);
     }
 
     private static void preConnect(URLConnection conn)
