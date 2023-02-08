@@ -121,8 +121,8 @@ public class SkinData implements ISkin
         };
     }
 
-    private ByteBuffer data;
-    private String type;
+    private volatile ByteBuffer data;
+    private volatile String type;
     private final Collection<Consumer<ISkin>> listeners = new CopyOnWriteArrayList<>();
     private final Collection<Function<ByteBuffer, ByteBuffer>> filters = new CopyOnWriteArrayList<>();
 
@@ -165,8 +165,8 @@ public class SkinData implements ISkin
                     break;
         }
 
-        this.data = buf;
         this.type = type;
+        this.data = buf;
     }
 
     @Override
